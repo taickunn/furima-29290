@@ -35,7 +35,6 @@ Things you may want to cover:
 |発送までの日数| sipping_day_id | integer | null: false |Active_hash|
 |状態| condition_id  | integer | null: false |Active_hash|
 |発送元地域| prefecture_id | integer | null: false |Active_hash|
-|販売状況| sold | boolean |||
 || user | references | null: false, foreign_key: true ||
 ### association
 * belongs_to :user
