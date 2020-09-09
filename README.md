@@ -7,8 +7,8 @@ Things you may want to cover:
 * Configuration
 * Database creation
 * Database initialization
-# データベース設計
-## Users
+# デ-タベ-ス設計
+## users
 |種類        | Column     | Type       | Options      |
 |-----------|------------|-------------|--------------|
 |ニックネーム| nickname   | string      | null: false  |
@@ -19,11 +19,11 @@ Things you may want to cover:
 |苗字（かな）| family_name_kana    | string     | null: false      |
 |名前（かな）| first_name_kana | string   | null: false    |
 |生年月日| birth_day   | date     | null: false     |
-### Association
+### association
 * has_many :items
 * has_many :comments
 * has_many :purchasers
-## Items
+## items
 |種類        | Column     | Type       | Options      |追記           |
 |-----------|------------|-------------|--------------|--------------|
 |画像|    |  | null: false  | ActiveStorage |
@@ -37,21 +37,21 @@ Things you may want to cover:
 |発送元地域| prefecture_id | integer | null: false |Active_hash|
 |販売状況| sold | boolean |||
 || user | references | null: false, foreign_key: true ||
-### Association
+### association
 * belongs_to :user
 * has_one :purchaser
 * has_many :comments
 * has_one_attached: image
-## comments
+## Comments
 |種類        | Column     | Type       | Options      |
 |-----------|------------|-------------|--------------|
 || comment   | string      | null: false  |
 || user | references | null: false, foreign_key: true  |
 || item | references | null: false, foreign_key: true  |
-### Association
+### association
 * belongs_to :user
 * belongs_to :item
-## Addresses
+## addresses
 |種類| Column     | Type       | Options      |追記          |
 |-----------|------------|-------------|--------------|-------------|
 || post_code   | string      | null: false  ||
@@ -61,14 +61,14 @@ Things you may want to cover:
 || building_name   | string   |        ||
 || phone_number  | string  | null: false, uniqueness: true ||
 || purchaser | references | null: false, foreign_key: true ||
-### Association
+### association
 * belongs_to :purchaser
-## purchasers
+## Purchasers
 |種類        | Column     | Type       | Options      |
 |-----------|------------|-------------|--------------|
 || item   | references  | null: false, foreign_key: true  |
 || user  | references | null: false, foreign_key: true  |
-### Association
+### association
 * belong_to :item
 * belong_to :user
 * has_one :address
