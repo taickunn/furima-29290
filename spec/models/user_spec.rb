@@ -5,63 +5,64 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  describe 'ユーザー新規登録ができる場合' do
-    it 'nicknameとfamily_nameとfirst_nameとfamily_name_kanaとfirst_name_kanaとbirth_dayとemailとpasswordとpassword_confirmationが存在していれば保存できること' do
-      expect(@user).to be_valid
+    describe 'ユーザー新規登録ができる場合' do
+        it 'nicknameとfamily_nameとfirst_nameとfamily_name_kanaとfirst_name_kanaとbirth_dayとemailとpasswordとpassword_confirmationが存在していれば保存できること' do
+          expect(@user).to be_valid
+          end
 
-      it 'passwordが6文字以上であれば登録できる' do
-        @user.password = "abc123"
-        @user.password_confirmation = "abc123"
-        expect(@user).to be_valid
-        end
+        it 'passwordが6文字以上であれば登録できる' do
+          @user.password = "abc123"
+          @user.password_confirmation = "abc123"
+          expect(@user).to be_valid
+          end
 
         it "passwordが英数字である場合は登録できる" do
           @user.password = "abc123"
           @user.password_confirmation = "abc123"
           expect(@user).to be_valid
-        end
+          end
     
         it "emailが@を含んでる場合は登録できる" do
           @user.email = "xxxxx@gmail.com"
           @user.valid?
           expect(@user).to be_valid
-        end
+          end
 
         it "family_nameが全角である場合は登録できる事" do
           @user.family_name = "山田"
           @user.valid?
           expect(@user).to be_valid
-        end
+          end
 
         it "family_name_kanaが全角である場合は登録できる事"   do
           @user.family_name_kana = "ヤマダ"
           @user.valid?
           expect(@user).to be_valid
-        end
+          end
 
         it "first_nameが全角である場合は登録できる事"do
-      @user.first_name = "陸太郎"
-      @user.valid?
-      expect(@user).to be_valid
-    end
+          @user.first_name = "陸太郎"
+          @user.valid?
+          expect(@user).to be_valid
+          end
 
-    it "first_name_kanaが全角である場合は登録できる事" do
-      @user.first_name_kana = "リクタロウ"
-      @user.valid?
-      expect(@user).to be_valid
+        it "first_name_kanaが全角である場合は登録できる事" do
+          @user.first_name_kana = "リクタロウ"
+          @user.valid?
+          expect(@user).to be_valid
+          end
     end
-end
 
     
 
 
 
-context 'ユーザー新規登録が出来ない場合' do
-      it 'nicknameが空では登録できないこと' do
+    context 'ユーザー新規登録が出来ない場合' do
+        it 'nicknameが空では登録できないこと' do
         @user.nickname = nil
         @user.valid?
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
-      end
+        end
 
       it 'emailが空では登録できないこと' do
         @user.email = nil
