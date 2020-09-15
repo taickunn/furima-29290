@@ -104,10 +104,22 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+    it "emailが@を含んでいない場合は登録出来ない" do
+      @user.email = "xxxxxgmail.com"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+
     it "family_nameが全角である場合は登録できる事" do
       @user.family_name = "山田"
       @user.valid?
       expect(@user).to be_valid
+    end
+
+    it "family_nameが全角でない場合は登録出来ない" do
+      @user.family_name = "ﾔﾏﾀﾞ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name は全角で入力してください。")
     end
 
     it "family_name_kanaが全角である場合は登録できる事"   do
@@ -116,16 +128,34 @@ RSpec.describe User, type: :model do
       expect(@user).to be_valid
     end
 
+    it "family_name_kanaが全角でない場合登録出来ない" do
+      @user.family_name_kana = "ﾔﾏﾀﾞ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name kana は全角カタカナで入力して下さい。")
+    end
+
     it "first_nameが全角である場合は登録できる事"do
       @user.first_name = "陸太郎"
       @user.valid?
       expect(@user).to be_valid
     end
 
+    it "first_nameが全角でない場合は登録出来ない" do
+      @user.first_name = "ﾘｸﾀﾛｳ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name は全角で入力してください。")
+    end
+
     it "first_name_kanaが全角である場合は登録できる事" do
       @user.first_name_kana = "リクタロウ"
       @user.valid?
       expect(@user).to be_valid
+    end
+
+    it "first_name_kanaが全角出ない場合は登録出来ない" do
+      @user.first_name_kana ="ﾘｸﾀﾛｳ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana は全角カタカナで入力して下さい。")
     end
   end
 end
