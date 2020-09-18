@@ -9,7 +9,7 @@ RSpec.describe Item, type: :model do
     
     context '商品が出品される場合' do
       
-      it "nameとdescriptionとcategory_idとcondition_idとpostage_idとprefecture_idとshipping_day_idとpriceが存在すれば出品できること" do
+      it "imageとnameとdescriptionとcategory_idとcondition_idとpostage_idとprefecture_idとshipping_day_idとpriceが存在すれば出品できること" do
         expect(@item).to be_valid
       end
     end  
@@ -74,6 +74,11 @@ RSpec.describe Item, type: :model do
         @item.price = "9999999"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+      end
+      it "imageが空では出品出来ない事" do
+          @item.image = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Image can't be blank")
       end
     end
   end

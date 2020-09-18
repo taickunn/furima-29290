@@ -1,5 +1,8 @@
 FactoryBot.define do
   factory :item do
+    after(:build) do |image|
+      image.image.attach(io: File.open('public/images/test_image.png'), filename: 'test_image.png')
+    end
   
     name {'kangol'}
     description {'kangolのパーカーです'}
