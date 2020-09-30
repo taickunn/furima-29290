@@ -1,6 +1,6 @@
 class Purchaser < ApplicationRecord
-  belong_to :item
-  belong_to :user
-  
+  belongs_to :item
+  belongs_to :user
+  has_one :orders
 
 end
