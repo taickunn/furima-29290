@@ -69,12 +69,17 @@ RSpec.describe SoldItem, type: :model do
         expect(@order.errors.full_messages).to include("City is invalid")
       end
 
-      it "電話番号に文字が入っている場合購入出来な事" do
+      it "phone_numberに文字が入っている場合購入出来な事" do
         @order.phone_number = "横浜市"
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number is invalid")
       end
 
+      it "phone_numberが12桁以上の場合購入出来ない事" do
+        @order.phone_number = "000000000000"
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+      end
     end
   end
 end
