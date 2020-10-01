@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :set_item, only: [:index, :create]
+  before_action :current_user, only: [:index, :create]
+  before_action :solditem, only: [:index, :create]
+
   def index
   end
 
@@ -34,5 +37,18 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def current_user?
+    if user_signed_in? && current_user.id == @item.user_id
+    redirect_to root_path
+    end
+  end
+
+  def solditem
+    if @item.purchaser != nil
+    redirect_to root_path
+    end
+  end
+
 
 end
