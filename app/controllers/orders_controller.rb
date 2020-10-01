@@ -8,15 +8,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-  @order = SoldItem.new(sold_params)
-  
-    if @order.save
-      pay_item
-    return redirect_to root_path
-    else
-    render 'index'
-    end
-  redirect_to root_path
+    @order = SoldItem.new(sold_params)
+      if @order.save
+        pay_item
+        return redirect_to root_path
+      else
+      render 'index'
+      end
+    redirect_to root_path
   end
 
     private
