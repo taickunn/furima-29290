@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
         pay_item
         return redirect_to root_path
       else
-      render 'index'
+      render :index
       end
     redirect_to root_path
   end
