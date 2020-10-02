@@ -9,13 +9,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = SoldItem.new(sold_params)
-      if @order.save
+      if @order.valid?
         pay_item
-        return redirect_to root_path
+        @order.save
+        redirect_to root_path
       else
       render :index
       end
-    redirect_to root_path
   end
 
     private
